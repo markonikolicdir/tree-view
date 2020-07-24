@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TreeEntryLang
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,9 +19,10 @@ class TreeEntryLang
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="TreeEntry", inversedBy="lang")
+     * @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
      */
-    private $entryId;
+    private $treeEntry;
 
     /**
      * @ORM\Column(type="string", length=3)
@@ -32,22 +34,30 @@ class TreeEntryLang
      */
     private $name;
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getEntryId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getTreeEntry()
     {
-        return $this->entryId;
+        return $this->treeEntry;
     }
 
-    public function setEntryId(int $entryId): self
+    /**
+     * @param mixed $treeEntry
+     */
+    public function setTreeEntry($treeEntry): void
     {
-        $this->entryId = $entryId;
-
-        return $this;
+        $this->treeEntry = $treeEntry;
     }
+
 
     public function getLang(): ?string
     {
