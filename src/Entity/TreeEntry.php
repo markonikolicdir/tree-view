@@ -27,9 +27,9 @@ class TreeEntry
     /**
      * Many TreeEntries have One TreeEntry.
      * @ORM\ManyToOne(targetEntity="TreeEntry", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", columnDefinition="DEFAULT 0")
      */
-    private $parent;
+    private $parent = 0;
 
 
     /**
@@ -82,6 +82,22 @@ class TreeEntry
     public function setParent($parent): void
     {
         $this->parent = $parent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * @param mixed $lang
+     */
+    public function setLang($lang): void
+    {
+        $this->lang = $lang;
     }
 
 }
