@@ -6,6 +6,8 @@ use App\Repository\TreeEntryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\TreeView\MyTreeView;
+
 
 class TreeViewController extends AbstractController
 {
@@ -14,10 +16,10 @@ class TreeViewController extends AbstractController
      * @param TreeEntryRepository $treeEntryRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(TreeEntryRepository $treeEntryRepository)
+    public function index(TreeEntryRepository $treeEntryRepository, MyTreeView $myTreeView)
     {
-
-        $treeEntry = $treeEntryRepository->fetchAllData();
+        $data = $treeEntryRepository->fetchAllData();
+        $treeEntry = $myTreeView->setData($data)->showCompleteTree();
 
         return $this->render('tree_view/index.html.twig', [
             'controller_name' => 'TreeViewController',
