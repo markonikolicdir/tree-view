@@ -16,7 +16,7 @@ class BuildTree
      * @param int $parentId
      * @return array
      */
-    public function tree(array $elements, $parentId = 0):array
+    public function tree(array $elements, $parentId = null):array
     {
         $tree = array();
         foreach ($elements as $element) {
