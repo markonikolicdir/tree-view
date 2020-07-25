@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TreeView B{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    Go to <a href="{{ path('tree_viewA') }}">Complete Tree View</a><br /><br />
+
+    {{ dump(treeEntry) }}
+
+    <div id="tree">
+        <ul id="myUL">
+            {% for tree in treeEntry %}
+            <li>
+                <span class="caret caret-expand" data-val="{{ tree.entry_id|e }}">{{ tree.name|e }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% block javascripts %}
+        <script>
+            $('ul').on('click','li .caret',function(){
+                var sel = this;
+
+                if (!$(sel).hasClass("caret-expand")) {
+                    $(sel).parent().find( "ul" ).remove();
+                    console.log($(sel).parent().find( "ul" ));
+                    $(sel).addClass("caret-expand");
+                    return false;
+                }
+
+                var entry_id = $(sel).data("val")
+
+                var request = $.ajax({
+                    url: "fetchAjaxTreeNode.php",
+                    method: "POST",
+                    data: {entry_id: entry_id},
+                    dataType: "html"
+                });
+
+                request.done(function (data) {
+                    var ajaxTreeView1 = ajaxTreeView(data);
+                    $(sel).after(ajaxTreeView1);
+                    $(sel).removeClass("caret-expand");
+                });
+
+                request.fail(function (jqXHR, textStatus) {
+                    alert("Request failed: " + textStatus);
+                });
+            });
+        </script>
+    {% endblock %}
+
+</div>
+{% endblock %}

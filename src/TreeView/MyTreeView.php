@@ -27,7 +27,8 @@ class MyTreeView extends AbstractTreeView {
 
     public function showAjaxTree(): ?array
     {
-
+        $germanData = $this->build->germanTranslation($this->data);
+        return $this->build->tree($germanData);
     }
 
     public function fetchAjaxTreeNode($entry_id): ?array
