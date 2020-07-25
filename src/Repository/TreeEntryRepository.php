@@ -24,13 +24,18 @@ class TreeEntryRepository extends ServiceEntityRepository
      */
     public function fetchAllData(): ?array
     {
-        return $this->createQueryBuilder('t')
+        $query = $this->createQueryBuilder('t')
             ->leftJoin('t.parent', 't2')
             ->leftJoin('t.lang', 'l')
             ->orderBy('l.name', 'ASC')
             ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
+
+
+//        echo $query->getSQL();
+//        die;
+
+        return $query->getResult();
     }
 
     /**
