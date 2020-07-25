@@ -53,8 +53,12 @@ class TreeViewController extends AbstractController
     {
         $id = $request->request->get('entry_id');
         $data = $treeEntryRepository->fetchLevelData($id);
-        $treeEntry = $myTreeView->setData($data)->showAjaxTree();
+//        $treeEntry = $myTreeView->setData($data)->fetchAjaxTreeNode();
 
-        return $this->json($treeEntry);
+//        var_dump($treeEntry);
+//
+//        die;
+
+        return $this->json($data);
     }
 }
