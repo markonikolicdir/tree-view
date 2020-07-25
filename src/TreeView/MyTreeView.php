@@ -7,6 +7,7 @@
 
 namespace App\TreeView;
 
+use App\Repository\TreeEntryRepository;
 Use App\Service\BuildTree;
 
 class MyTreeView extends AbstractTreeView {
@@ -14,9 +15,12 @@ class MyTreeView extends AbstractTreeView {
     private $build;
     private $data;
 
-    public function __construct(BuildTree $build)
+    private $repo;
+
+    public function __construct(TreeEntryRepository $treeEntryRepository, BuildTree $build)
     {
         $this->build = $build;
+        $this->repo = $treeEntryRepository;
     }
 
     public function showCompleteTree(): ?array
@@ -33,17 +37,18 @@ class MyTreeView extends AbstractTreeView {
 
     public function fetchAjaxTreeNode($entry_id): ?array
     {
-        $germanData = $this->build->germanTranslation($this->data);
+        $data = $this->repo->fetchLevelData($entry_id);
+        $germanData = $this->build->germanTranslation($data);
 
-//        foreach ($germanData as $key => $ger){
-//            $count = $this->db->countChildren($ger['entry_id']);
-//            if($count){
-//                $germanData[$key]['children'] = true;
-//            }else{
-//                $germanData[$key]['children'] = false;
-//            }
-//            unset($germanData[$key]['parent_entry_id']);
-//        }
+        foreach ($germanData as $key => $ger){
+            $count = $this->repo->countChildren($ger['entry_id']);
+            if($count){
+                $germanData[$key]['children'] = true;
+            }else{
+                $germanData[$key]['children'] = false;
+            }
+            unset($germanData[$key]['parent_entry_id']);
+        }
 
         return $germanData;
     }

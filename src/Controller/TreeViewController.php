@@ -46,19 +46,15 @@ class TreeViewController extends AbstractController
 
     /**
      * @Route("/ajax", name="ajax")
-     * @param TreeEntryRepository $treeEntryRepository
+     * @param MyTreeView $myTreeView
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ajax(TreeEntryRepository $treeEntryRepository, MyTreeView $myTreeView, Request $request)
+    public function ajax(MyTreeView $myTreeView, Request $request)
     {
         $id = $request->request->get('entry_id');
-        $data = $treeEntryRepository->fetchLevelData($id);
-//        $treeEntry = $myTreeView->setData($data)->fetchAjaxTreeNode();
+        $treeEntry = $myTreeView->fetchAjaxTreeNode($id);
 
-//        var_dump($treeEntry);
-//
-//        die;
-
-        return $this->json($data);
+        return $this->json($treeEntry);
     }
 }
