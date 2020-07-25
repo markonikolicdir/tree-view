@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\TreeEntryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,15 +11,21 @@ use App\TreeView\MyTreeView;
 
 class TreeViewController extends AbstractController
 {
+
+    private $myTreeView;
+
+    public function __construct(MyTreeView $myTreeView)
+    {
+        $this->myTreeView = $myTreeView;
+    }
+
     /**
      * @Route("/", name="tree_view_a")
-     * @param TreeEntryRepository $treeEntryRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function treeA(TreeEntryRepository $treeEntryRepository, MyTreeView $myTreeView)
+    public function treeA()
     {
-        $data = $treeEntryRepository->fetchAllData();
-        $treeEntry = $myTreeView->setData($data)->showCompleteTree();
+        $treeEntry = $this->myTreeView->showCompleteTree();
 
         return $this->render('tree_view/index.html.twig', [
             'controller_name' => 'TreeViewController',
@@ -30,13 +35,11 @@ class TreeViewController extends AbstractController
 
     /**
      * @Route("/taskb", name="tree_view_b")
-     * @param TreeEntryRepository $treeEntryRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function treeB(TreeEntryRepository $treeEntryRepository, MyTreeView $myTreeView)
+    public function treeB()
     {
-        $data = $treeEntryRepository->fetchLevelData();
-        $treeEntry = $myTreeView->setData($data)->showAjaxTree();
+        $treeEntry = $this->myTreeView->showAjaxTree();
 
         return $this->render('tree_view/ajax.html.twig', [
             'controller_name' => 'TreeViewController',
@@ -46,14 +49,13 @@ class TreeViewController extends AbstractController
 
     /**
      * @Route("/ajax", name="ajax")
-     * @param MyTreeView $myTreeView
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ajax(MyTreeView $myTreeView, Request $request)
+    public function ajax(Request $request)
     {
         $id = $request->request->get('entry_id');
-        $treeEntry = $myTreeView->fetchAjaxTreeNode($id);
+        $treeEntry = $this->myTreeView->fetchAjaxTreeNode($id);
 
         return $this->json($treeEntry);
     }

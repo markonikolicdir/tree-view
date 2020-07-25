@@ -24,35 +24,40 @@
 
     {% block javascripts %}
         <script>
-            $('ul').on('click','li .caret',function(e){
-                e.preventDefault();
 
-                var sel = this;
+            // A $( document ).ready() block.
+            $( document ).ready(function() {
 
-                if (!$(sel).hasClass("caret-expand")) {
-                    $(sel).parent().find( "ul" ).remove();
-                    console.log($(sel).parent().find( "ul" ));
-                    $(sel).addClass("caret-expand");
-                    return false;
-                }
+                $('ul').on('click','li .caret',function(e){
+                    e.preventDefault();
 
-                var entry_id = $(sel).data("val");
+                    var sel = this;
 
-                var request = $.ajax({
-                    url: "{{ path('ajax') }}",
-                    method: "POST",
-                    data: {entry_id: entry_id},
-                    dataType: "html"
-                });
+                    if (!$(sel).hasClass("caret-expand")) {
+                        $(sel).parent().find( "ul" ).remove();
+                        console.log($(sel).parent().find( "ul" ));
+                        $(sel).addClass("caret-expand");
+                        return false;
+                    }
 
-                request.done(function (data) {
-                    var ajaxTreeView1 = ajaxTreeView(data);
-                    $(sel).after(ajaxTreeView1);
-                    $(sel).removeClass("caret-expand");
-                });
+                    var entry_id = $(sel).data("val");
 
-                request.fail(function (jqXHR, textStatus) {
-                    alert("Request failed: " + textStatus);
+                    var request = $.ajax({
+                        url: "{{ path('ajax') }}",
+                        method: "POST",
+                        data: {entry_id: entry_id},
+                        dataType: "html"
+                    });
+
+                    request.done(function (data) {
+                        var ajaxTreeView1 = ajaxTreeView(data);
+                        $(sel).after(ajaxTreeView1);
+                        $(sel).removeClass("caret-expand");
+                    });
+
+                    request.fail(function (jqXHR, textStatus) {
+                        alert("Request failed: " + textStatus);
+                    });
                 });
             });
         </script>

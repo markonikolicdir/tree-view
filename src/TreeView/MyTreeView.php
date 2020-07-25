@@ -13,7 +13,6 @@ Use App\Service\BuildTree;
 class MyTreeView extends AbstractTreeView {
 
     private $build;
-    private $data;
 
     private $repo;
 
@@ -25,13 +24,15 @@ class MyTreeView extends AbstractTreeView {
 
     public function showCompleteTree(): ?array
     {
-        $germanData = $this->build->germanTranslation($this->data);
+        $data = $this->repo->fetchAllData();
+        $germanData = $this->build->germanTranslation($data);
         return $this->build->tree($germanData);
     }
 
     public function showAjaxTree(): ?array
     {
-        $germanData = $this->build->germanTranslation($this->data);
+        $data = $this->repo->fetchLevelData();
+        $germanData = $this->build->germanTranslation($data);
         return $this->build->tree($germanData);
     }
 
@@ -51,10 +52,5 @@ class MyTreeView extends AbstractTreeView {
         }
 
         return $germanData;
-    }
-
-    public function setData($data){
-        $this->data = $data;
-        return $this;
     }
 }
