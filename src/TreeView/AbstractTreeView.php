@@ -1,6 +1,6 @@
 <?php
 
-namespace TreeView;
+namespace App\TreeView;
  
  abstract class AbstractTreeView {
     abstract public function showCompleteTree();

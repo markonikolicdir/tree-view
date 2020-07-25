@@ -42,6 +42,7 @@ class TreeEntry
      */
     public function __construct() {
         $this->children = new ArrayCollection();
+        $this->lang = new ArrayCollection();
     }
 
     /**

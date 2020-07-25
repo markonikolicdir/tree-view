@@ -19,6 +19,20 @@ class TreeEntryRepository extends ServiceEntityRepository
         parent::__construct($registry, TreeEntry::class);
     }
 
+    /**
+     * @return array|null
+     */
+    public function fetchAllData(): ?array
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.parent', 't2')
+            ->leftJoin('t.lang', 'l')
+            ->orderBy('l.name', 'ASC')
+            ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return TreeEntry[] Returns an array of TreeEntry objects
     //  */
