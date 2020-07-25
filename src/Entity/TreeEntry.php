@@ -27,9 +27,9 @@ class TreeEntry
     /**
      * Many TreeEntries have One TreeEntry.
      * @ORM\ManyToOne(targetEntity="TreeEntry", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", columnDefinition="DEFAULT 0")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
-    private $parent = 0;
+    private $parent;
 
 
     /**

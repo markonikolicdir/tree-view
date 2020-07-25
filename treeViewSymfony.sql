@@ -36,7 +36,7 @@ CREATE TABLE `doctrine_migration_versions` (
 
 LOCK TABLES `doctrine_migration_versions` WRITE;
 /*!40000 ALTER TABLE `doctrine_migration_versions` DISABLE KEYS */;
-INSERT INTO `doctrine_migration_versions` VALUES ('DoctrineMigrations\\Version20200724122845','2020-07-24 14:30:01',2453);
+INSERT INTO `doctrine_migration_versions` VALUES ('DoctrineMigrations\\Version20200725081548','2020-07-25 10:16:00',3439);
 /*!40000 ALTER TABLE `doctrine_migration_versions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,7 +53,7 @@ CREATE TABLE `tree_entry` (
   PRIMARY KEY (`id`),
   KEY `IDX_9323BB15727ACA70` (`parent_id`),
   CONSTRAINT `FK_9323BB15727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `tree_entry` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +62,7 @@ CREATE TABLE `tree_entry` (
 
 LOCK TABLES `tree_entry` WRITE;
 /*!40000 ALTER TABLE `tree_entry` DISABLE KEYS */;
+INSERT INTO `tree_entry` VALUES (1,NULL),(2,NULL),(3,NULL),(9,1),(10,1),(13,3),(7,5),(18,5),(8,8),(4,9),(5,9),(6,9),(11,10),(12,11),(15,13),(17,13),(19,13),(14,14);
 /*!40000 ALTER TABLE `tree_entry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +81,7 @@ CREATE TABLE `tree_entry_lang` (
   PRIMARY KEY (`id`),
   KEY `IDX_6E380470BA364942` (`entry_id`),
   CONSTRAINT `FK_6E380470BA364942` FOREIGN KEY (`entry_id`) REFERENCES `tree_entry` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +90,7 @@ CREATE TABLE `tree_entry_lang` (
 
 LOCK TABLES `tree_entry_lang` WRITE;
 /*!40000 ALTER TABLE `tree_entry_lang` DISABLE KEYS */;
+INSERT INTO `tree_entry_lang` VALUES (1,1,'eng','Prio 1 Tasks'),(2,2,'eng','Prio 2 Tasks'),(3,3,'eng','Prio 3 Tasks'),(4,1,'ger','Prio 1 Aufgaben'),(5,2,'ger','Prio 2 Aufgaben'),(6,3,'ger','Prio 3 Aufgaben'),(7,4,'ger','Punkt ABC123'),(8,5,'ger','Punkt BCD123'),(9,6,'ger','Punkt UARGH123'),(10,4,'eng','Point ABC123'),(11,5,'eng','Point BCD123'),(12,6,'eng','Point UARGH123'),(13,7,'eng','Task 22222'),(14,8,'eng','Task 566'),(15,9,'eng','Supplier'),(16,10,'eng','Customer'),(17,11,'eng','204. Task'),(18,12,'eng','209. Task'),(19,13,'eng','123. Task'),(20,14,'eng','asdasd. Task'),(21,15,'eng','nomnom. Task'),(22,19,'eng','mimimi. Task'),(23,17,'eng','GedÃ¶ns Task'),(24,18,'eng','ZOMG Task');
 /*!40000 ALTER TABLE `tree_entry_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -101,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-24 14:33:28
+-- Dump completed on 2020-07-25 10:26:46
