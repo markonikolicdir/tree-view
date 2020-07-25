@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TreeViewController!{% endblock %}
+{% block title %}TreeView A{% endblock %}
 
 {% block body %}
 <style>
@@ -9,15 +9,6 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/marko/dev/vezba/zadatak/treeView/src/Controller/TreeViewController.php'|file_link(0) }}">src/Controller/TreeViewController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/marko/dev/vezba/zadatak/treeView/templates/tree_view/index.html.twig'|file_link(0) }}">templates/tree_view/index.html.twig</a></code></li>
-    </ul>
-
-    {#{{ dump(treeEntry) }}#}
 
     Go to <a href="ajax.php">Ajax Tree View</a><br /><br />
 
@@ -25,7 +16,7 @@
 
     {% block javascripts %}
     <script>
-        var tree = treeView.init('{{ treeEntry }}');
+        var tree = treeView.init('{{ treeEntry|raw }}');
         var div = document.getElementById('tree');
 
         div.innerHTML = tree;
