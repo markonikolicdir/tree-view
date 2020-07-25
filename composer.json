@@ -1,4 +1,4 @@
-{
+symfony/asset{
     "type": "project",
     "license": "proprietary",
     "require": {

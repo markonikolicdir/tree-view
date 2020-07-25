@@ -17,7 +17,33 @@
         <li>Your template at <code><a href="{{ '/home/marko/dev/vezba/zadatak/treeView/templates/tree_view/index.html.twig'|file_link(0) }}">templates/tree_view/index.html.twig</a></code></li>
     </ul>
 
-    {{ dump(treeEntry) }}
+    {#{{ dump(treeEntry) }}#}
+
+    Go to <a href="ajax.php">Ajax Tree View</a><br /><br />
+
+    <div id="tree"></div>
+
+    {% block javascripts %}
+    <script>
+        var tree = treeView.init('{{ treeEntry }}');
+        var div = document.getElementById('tree');
+
+        div.innerHTML = tree;
+        // treeView.expandAll();
+
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function() {
+                if(this.parentElement.querySelector(".nested")){
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("caret-expand");
+                }
+            });
+        }
+    </script>
+    {% endblock %}
 
 </div>
 {% endblock %}

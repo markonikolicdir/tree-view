@@ -23,7 +23,7 @@ class TreeViewController extends AbstractController
 
         return $this->render('tree_view/index.html.twig', [
             'controller_name' => 'TreeViewController',
-            'treeEntry' => $treeEntry
+            'treeEntry' => json_encode($treeEntry)
         ]);
     }
 }

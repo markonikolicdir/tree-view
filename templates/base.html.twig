@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('/js/tree.js') }}" ></script>
+        <link rel="stylesheet" href="{{ asset('/css/style.css') }}" type="text/css">
     </head>
     <body>
         {% block body %}{% endblock %}
