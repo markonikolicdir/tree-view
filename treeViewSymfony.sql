@@ -90,7 +90,7 @@ CREATE TABLE `tree_entry_lang` (
 
 LOCK TABLES `tree_entry_lang` WRITE;
 /*!40000 ALTER TABLE `tree_entry_lang` DISABLE KEYS */;
-INSERT INTO `tree_entry_lang` VALUES (1,1,'eng','Prio 1 Tasks'),(2,2,'eng','Prio 2 Tasks'),(3,3,'eng','Prio 3 Tasks'),(4,1,'ger','Prio 1 Aufgaben'),(5,2,'ger','Prio 2 Aufgaben'),(6,3,'ger','Prio 3 Aufgaben'),(7,4,'ger','Punkt ABC123'),(8,5,'ger','Punkt BCD123'),(9,6,'ger','Punkt UARGH123'),(10,4,'eng','Point ABC123'),(11,5,'eng','Point BCD123'),(12,6,'eng','Point UARGH123'),(13,7,'eng','Task 22222'),(14,8,'eng','Task 566'),(15,9,'eng','Supplier'),(16,10,'eng','Customer'),(17,11,'eng','204. Task'),(18,12,'eng','209. Task'),(19,13,'eng','123. Task'),(20,14,'eng','asdasd. Task'),(21,15,'eng','nomnom. Task'),(22,19,'eng','mimimi. Task'),(23,17,'eng','GedÃ¶ns Task'),(24,18,'eng','ZOMG Task');
+INSERT INTO `tree_entry_lang` VALUES (1,1,'eng','Prio 1 Tasks'),(2,2,'eng','Prio 2 Tasks'),(3,3,'eng','Prio 3 Tasks'),(4,1,'ger','Prio 1 Aufgaben'),(5,2,'ger','Prio 2 Aufgaben'),(6,3,'ger','Prio 3 Aufgaben'),(7,4,'ger','Punkt ABC123'),(8,5,'ger','Punkt BCD123'),(9,6,'ger','Punkt UARGH123'),(10,4,'eng','Point ABC123'),(11,5,'eng','Point BCD123'),(12,6,'eng','Point UARGH123'),(13,7,'eng','Task 22222'),(14,8,'eng','Task 566'),(15,9,'eng','Supplier'),(16,10,'eng','Customer'),(17,11,'eng','204. Task'),(18,12,'eng','209. Task'),(19,13,'eng','123. Task'),(20,14,'eng','asdasd. Task'),(21,15,'eng','nomnom. Task'),(22,19,'eng','mimimi. Task'),(23,17,'eng','Gedöns Task'),(24,18,'eng','ZOMG Task');
 /*!40000 ALTER TABLE `tree_entry_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
