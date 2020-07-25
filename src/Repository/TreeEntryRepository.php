@@ -39,14 +39,37 @@ class TreeEntryRepository extends ServiceEntityRepository
      */
     public function fetchLevelData($id = null): ?array
     {
-        return $this->createQueryBuilder('t')
+        $query = $this->createQueryBuilder('t')
             ->leftJoin('t.parent', 't2')
             ->leftJoin('t.lang', 'l')
             ->orderBy('l.name', 'ASC')
-            ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id')
-            ->andWhere('t2.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
+            ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id');
+
+        if(is_null($id)){
+            $query->where($query->expr()->isNull('t2.id'));
+        }else{
+            $query->andWhere('t2.id = :id')
+                ->setParameter('id', $id);
+        }
+
+//        echo $query->getQuery()->getSQL();
+
+//        echo $query->getParameters();
+//        die;
+
+        return $query->getQuery()
             ->getResult();
+
+//        $query=$this->createQueryBuilder('t')
+//            ->leftJoin('t.parent', 't2')
+//            ->leftJoin('t.lang', 'l')
+//            ->orderBy('l.name', 'ASC')
+//            ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id')
+//            ->andWhere('t2.id = :id')
+//            ->setParameter('id', $id)
+//            ->getQuery();
+//        echo $query->getSQL();
+//
+//        die;
     }
 }
