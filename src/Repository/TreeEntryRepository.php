@@ -31,7 +31,6 @@ class TreeEntryRepository extends ServiceEntityRepository
             ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id')
             ->getQuery();
 
-
 //        echo $query->getSQL();
 //        die;
 
@@ -57,64 +56,21 @@ class TreeEntryRepository extends ServiceEntityRepository
                 ->setParameter('id', $id);
         }
 
-//        echo $query->getQuery()->getSQL();
-
-//        echo $query->getParameters();
-//        die;
-
         return $query->getQuery()
             ->getResult();
-
-//        $query=$this->createQueryBuilder('t')
-//            ->leftJoin('t.parent', 't2')
-//            ->leftJoin('t.lang', 'l')
-//            ->orderBy('l.name', 'ASC')
-//            ->select('l.name', 'l.lang', 't.id AS entry_id', 't2.id AS parent_entry_id')
-//            ->andWhere('t2.id = :id')
-//            ->setParameter('id', $id)
-//            ->getQuery();
-//        echo $query->getSQL();
-//
-//        die;
     }
 
 
     public function countChildren($id): ?int
     {
-//        $sql = "SELECT COUNT(*) AS cnt FROM tree_entry_lang tel
-//                LEFT JOIN tree_entry te ON tel.entry_id = te.entry_id
-//                WHERE parent_entry_id = :id";
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->execute(array('id' => $id));
-//        $shipArray = $statement->fetch(\PDO::FETCH_ASSOC);
-//
-//        if (!$shipArray) {
-//            return 0;
-//        }
-//
-//        return $shipArray['cnt'];
-
-
         $query = $this->createQueryBuilder('t')
+            ->leftJoin('t.parent', 't2')
             ->leftJoin('t.lang', 'l')
             ->select('COUNT(t.id)')
-            ->andWhere('t.id = :id')
+            ->andWhere('t2.id = :id')
             ->setParameter('id', $id);;
-
-
-//            echo $id . '<br>';
-//
-//        echo $query->getQuery()->getSQL();
-
-//        echo $query->getParameters();
-//        die;
 
         return $query->getQuery()
             ->getSingleScalarResult();
-
-//        var_dump($cnt);
-//        die;
-
-//        return !is_null($cnt['cnt']) ? $cnt['cnt'] : 0;
     }
 }

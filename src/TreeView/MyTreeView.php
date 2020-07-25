@@ -43,11 +43,14 @@ class MyTreeView extends AbstractTreeView {
 
         foreach ($germanData as $key => $ger){
             $count = $this->repo->countChildren($ger['entry_id']);
-            if($count){
-                $germanData[$key]['children'] = true;
-            }else{
-                $germanData[$key]['children'] = false;
-            }
+
+            $germanData[$key]['children'] = $count;
+
+//            if($count){
+//                $germanData[$key]['children'] = true;
+//            }else{
+//                $germanData[$key]['children'] = false;
+//            }
             unset($germanData[$key]['parent_entry_id']);
         }
 
