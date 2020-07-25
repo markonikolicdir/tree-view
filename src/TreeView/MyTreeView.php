@@ -33,7 +33,19 @@ class MyTreeView extends AbstractTreeView {
 
     public function fetchAjaxTreeNode($entry_id): ?array
     {
+        $germanData = $this->build->germanTranslation($this->data);
 
+//        foreach ($germanData as $key => $ger){
+//            $count = $this->db->countChildren($ger['entry_id']);
+//            if($count){
+//                $germanData[$key]['children'] = true;
+//            }else{
+//                $germanData[$key]['children'] = false;
+//            }
+//            unset($germanData[$key]['parent_entry_id']);
+//        }
+
+        return $germanData;
     }
 
     public function setData($data){

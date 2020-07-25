@@ -10,7 +10,7 @@
 
 <div class="example-wrapper">
 
-    Go to <a href="{{ path('tree_viewA') }}">Complete Tree View</a><br /><br />
+    Go to <a href="{{ path('tree_view_a') }}">Complete Tree View</a><br /><br />
 
     {{ dump(treeEntry) }}
 
@@ -36,10 +36,10 @@
                     return false;
                 }
 
-                var entry_id = $(sel).data("val")
+                var entry_id = $(sel).data("val");
 
                 var request = $.ajax({
-                    url: "fetchAjaxTreeNode.php",
+                    url: {{ path('ajax') }},
                     method: "POST",
                     data: {entry_id: entry_id},
                     dataType: "html"
